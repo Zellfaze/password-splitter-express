@@ -12,6 +12,12 @@ var apiRouter = require('./routes/api');
 
 var app = express();
 
+// Check enviornment
+var graphIqlEnabled = false;
+if (app.settings.env === "development") {
+  graphIqlEnabled = true;
+}
+
 // view engine setup
 app.engine('mustache', mustacheExpress());
 app.set('views', path.join(__dirname, 'views'));
@@ -23,12 +29,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+console.log(app.settings.env);
+
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/graphql', graphqlHTTP({
   schema: graphQlSchema,
   rootValue: graphQlRoot,
-  graphiql: true,
+  graphiql: graphIqlEnabled,
 }));
 
 module.exports = app;
