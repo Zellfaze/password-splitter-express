@@ -5,15 +5,7 @@ var BlobModel = require('../lib/blob_model.js');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  //BlobModel.getBlobList().then( (result) => { console.log(result) });
-  CryptoFunction.generateBlob('lol', 2, 2, [{username: "1", password: "2"},{username: "3", password: "4"}]).then( (blob) => {
-    return BlobModel.saveBlob(blob);
-  }).then( () => {
-    console.log("Success");
-  }).catch( (err) => {
-    console.log(err);
-  });
-  returnApiData(req, res, 'respond with a resource');
+  returnApiData(req, res, 'Please use /api/get, /api/store, or /graphql endpoint');
 });
 
 router.get('/list/', function(req, res, next) {

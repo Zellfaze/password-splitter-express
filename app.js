@@ -3,6 +3,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mustacheExpress = require('mustache-express');
+var { graphqlHTTP } = require('express-graphql');
+var { buildSchema } = require('graphql');
+var {graphQlSchema, graphQlRoot} = require('./graphql/schema.js');
 
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
@@ -22,5 +25,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
+app.use('/graphql', graphqlHTTP({
+  schema: graphQlSchema,
+  rootValue: graphQlRoot,
+  graphiql: true,
+}));
 
 module.exports = app;
