@@ -1,6 +1,8 @@
 # Development Install
 Please run `npm install` to install dependencies.
 
+Then run `npm run createdb` to create a blank database.
+
 Then run the following to start the dev server:
 
 ```bash

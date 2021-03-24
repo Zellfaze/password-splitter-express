@@ -26,6 +26,7 @@ module.exports.graphQlRoot = {
         data: results.blob
       };
     }).catch( (err) => {
+      console.log(err);
       return null;
     });
   },
